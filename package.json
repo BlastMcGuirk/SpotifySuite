@@ -1,0 +1,25 @@
+{
+  "name": "spotifysuite",
+  "version": "1.0.0",
+  "description": "A suite application for Spotify offering a wide range of simplifications and quality of life improvements.",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BlastMcGuirk/SpotifySuite.git"
+  },
+  "keywords": [
+    "Spotify"
+  ],
+  "author": "Brendan McGuirk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BlastMcGuirk/SpotifySuite/issues"
+  },
+  "homepage": "https://github.com/BlastMcGuirk/SpotifySuite#readme",
+  "dependencies": {
+    "electron": "^4.0.0"
+  }
+}

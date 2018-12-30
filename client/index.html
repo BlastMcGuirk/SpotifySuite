@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style/main.css">
+    <link rel="stylesheet" href="style/index.css">
+    <meta charset="UTF-8">
+    <title>Welcome to Spotify Suite</title>
+</head>
+<body>
+    <h2>Welcome to</h2>
+    <h1>Spotify Suite</h1>
+    <h5>Made by Brendan McGuirk</h5>
+    <p><b>A suite application for Spotify offering a wide range of simplifications and quality of life improvements</b></p>
+    <input id="start" type="button" value="LET'S GET STARTED" onclick="getStarted();" />
+    <script>
+        const ipc = require('electron').ipcRenderer;
+        function getStarted() {
+            ipc.send('getStarted');
+        }
+    </script>
+</body>
+</html>
