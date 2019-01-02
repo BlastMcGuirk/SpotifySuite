@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/BlastMcGuirk/SpotifySuite#readme",
   "dependencies": {
-    "electron": "^4.0.0"
+    "electron": "^4.0.0",
+    "xmlhttprequest": "^1.8.0"
   }
 }

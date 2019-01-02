@@ -3,7 +3,8 @@ const {app, BrowserWindow, ipcMain} = electron;
 
 const SpotifyLogin = require('./client/SpotifyLogin.js')
 
-let mainWindow;
+var mainWindow;
+var authToken;
 
 function createWindow() {
     mainWindow = new BrowserWindow({ width: 800, height: 600 });
@@ -13,6 +14,7 @@ function createWindow() {
     
     // TODO: Check for login, skip index page
     mainWindow.loadFile('client/index.html');
+    console.log("Starting");
 
     mainWindow.on('closed', () => {
         // close app for now
@@ -37,10 +39,15 @@ app.on('activate', () => {
     }
 });
 
-ipcMain.on('getStarted', () => {
+ipcMain.on('getStarted', (event, args) => {
     // Do spotify authentication
-    
-    mainWindow.loadFile('client/login.html');
+    SpotifyLogin.startServer(() => {
+        mainWindow.loadURL(SpotifyLogin.URL);
+    },
+    (response) => {
+        authToken = response.access_token;
+        mainWindow.loadFile('client/home.html');
+    });
 });
 
 ipcMain.on('login', (event, args) => {
