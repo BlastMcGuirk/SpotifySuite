@@ -8,5 +8,17 @@
 </head>
 <body>
     <h1>Home Page</h1>
+    <input type="button" value="GET STUFF" id="btn" onclick="getStuff();">
+    <p id="resu"></p>
+    <script>
+        const ipc = require('electron').ipcRenderer;
+        function getStuff() {
+            ipc.send('getStuff', 'ready');
+        }
+
+        ipc.on('gotStuff', (event, args) => {
+            document.getElementById("resu").innerHTML = args;
+        });
+    </script>
 </body>
 </html>

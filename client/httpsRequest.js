@@ -1,6 +1,7 @@
 const https = require('https');
+const fs = require('fs');
 
-const AUTH_URL = "https://accounts.spotify.com";
+var tokens;
 
 function getAuthToken(code, redirect, onFinish) {
     const options = {
@@ -12,14 +13,13 @@ function getAuthToken(code, redirect, onFinish) {
             'Content-Type': "application/x-www-form-urlencoded"
         }
     };
-    const fs = require('fs');
 
     const req = https.request(options, (res) => {
         let response = '';
         res.on('data', (chunk) => { response += chunk; });
         res.on('end', () => {
-            const responseJson = JSON.parse(response);
-            onFinish(responseJson);
+            tokens = JSON.parse(response);
+            onFinish();
         });
     }).on('error', (e) => {
         // TODO: Go to error page or something
@@ -30,6 +30,31 @@ function getAuthToken(code, redirect, onFinish) {
     req.end(query);
 }
 
+function getApi(path, callback) {
+    const options = {
+        hostname: 'api.spotify.com',
+        path: path,
+        method: 'GET',
+        headers: {
+            Authorization: "Bearer " + tokens.access_token
+        }
+    };
+
+    const req = https.request(options, (res) => {
+        let response = '';
+        res.on('data', (chunk) => { response += chunk; });
+        res.on('end', () => {
+            callback(response);
+        });
+    }).on('error', (e) => {
+        // TODO: Go to error page or something
+        fs.writeFile('errorLog.txt', e, (err) => {});
+    });
+
+    req.end();
+}
+
 module.exports = {
-    getAuthToken
+    getAuthToken,
+    getApi
 };

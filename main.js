@@ -1,7 +1,8 @@
 const electron = require('electron');
 const {app, BrowserWindow, ipcMain} = electron;
 
-const SpotifyLogin = require('./client/SpotifyLogin.js')
+const SpotifyLogin = require('./client/SpotifyLogin.js');
+const HTTPSRequest = require('./client/httpsRequest.js');
 
 var mainWindow;
 var authToken;
@@ -44,13 +45,13 @@ ipcMain.on('getStarted', (event, args) => {
     SpotifyLogin.startServer(() => {
         mainWindow.loadURL(SpotifyLogin.URL);
     },
-    (response) => {
-        authToken = response.access_token;
+    () => {
         mainWindow.loadFile('client/home.html');
     });
 });
 
-ipcMain.on('login', (event, args) => {
-    if (args.username === 'asdf')
-        mainWindow.loadFile('client/home.html');
+ipcMain.on('getStuff', (event, args) => {
+    HTTPSRequest.getApi('/v1/me/player', (data) => {
+        event.sender.send('gotStuff', data);
+    });
 });

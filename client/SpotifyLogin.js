@@ -1,7 +1,9 @@
 const REDIRECT_URI = 'http://localhost:8080/authorize';
-const URL = 'https://accounts.spotify.com/authorize?client_id=9301080002d341dda12eae6e9e04b854&' +
-            'response_type=code&redirect_uri=' + REDIRECT_URI;
-var token;
+const SCOPE = 'user-read-playback-state';
+const URL = 'https://accounts.spotify.com/authorize' +
+            '?client_id=9301080002d341dda12eae6e9e04b854' +
+            '&response_type=code&redirect_uri=' + REDIRECT_URI +
+            '&scope=' + SCOPE;
 
 function startServer(spotifyCall, onFinish) {
     const http = require('http');
@@ -26,6 +28,5 @@ function startServer(spotifyCall, onFinish) {
 
 module.exports = {
     URL,
-    startServer,
-    token
+    startServer
 };
