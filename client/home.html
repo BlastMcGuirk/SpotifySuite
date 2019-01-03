@@ -19,6 +19,19 @@
         ipc.on('gotStuff', (event, args) => {
             document.getElementById("resu").innerHTML = args;
         });
+
+        ipc.on('curSong', (event, args) => {
+            var res = filterResults(JSON.parse(args));
+            document.getElementById("resu").innerHTML = res;
+        });
+
+        function filterResults(res) {
+            var end = '';
+            end += res.item.name;
+            end += '<br>';
+            end += res.item.album.name;
+            return end;
+        }
     </script>
 </body>
 </html>

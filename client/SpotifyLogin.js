@@ -1,5 +1,5 @@
 const REDIRECT_URI = 'http://localhost:8080/authorize';
-const SCOPE = 'user-read-playback-state';
+const SCOPE = 'user-read-playback-state user-read-currently-playing';
 const URL = 'https://accounts.spotify.com/authorize' +
             '?client_id=9301080002d341dda12eae6e9e04b854' +
             '&response_type=code&redirect_uri=' + REDIRECT_URI +

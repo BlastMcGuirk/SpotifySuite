@@ -1,11 +1,11 @@
 const electron = require('electron');
-const {app, BrowserWindow, ipcMain} = electron;
+const {app, BrowserWindow, ipcMain, globalShortcut} = electron;
 
 const SpotifyLogin = require('./client/SpotifyLogin.js');
+const apiCalls = require('./client/apiCalls.js');
 const HTTPSRequest = require('./client/httpsRequest.js');
 
 var mainWindow;
-var authToken;
 
 function createWindow() {
     mainWindow = new BrowserWindow({ width: 800, height: 600 });
@@ -15,13 +15,15 @@ function createWindow() {
     
     // TODO: Check for login, skip index page
     mainWindow.loadFile('client/index.html');
-    console.log("Starting");
 
     mainWindow.on('closed', () => {
         // close app for now
         // eventually leave it open to be used in background
         mainWindow = null;
     });
+
+    // Register shortcuts
+    apiCalls.registerShortcuts(globalShortcut, mainWindow);
 }
 
 app.on('ready', createWindow);
