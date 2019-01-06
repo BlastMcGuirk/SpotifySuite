@@ -7,31 +7,33 @@
 		<title>Spotify Suite</title>
 	</head>
 	<body>
-		<h1>Home Page</h1>
-		<input type="button" value="GET STUFF" id="btn" onclick="getStuff();" />
+		<h1>Current Hotkeys</h1>
+
+		<table class="hotkeyTable">
+			<caption id="instructions">
+				To change a hotkey, click on an action's current hotkey
+			</caption>
+			<tr>
+				<th>Action</th>
+				<th>Description</th>
+				<th>Hotkey</th>
+			</tr>
+			<tr>
+				<td>Current Song</td>
+				<td>
+					Get the current song playing, and briefly display it's information on
+					the screen.
+				</td>
+				<td id="cur-song-sel" onclick="changeHotkey('cur-song-sel');">F7</td>
+			</tr>
+			<tr>
+				<td>Save Song</td>
+				<td>Save the currently playing song to a Spotify Suite playlist.</td>
+				<td id="save-song-sel" onclick="changeHotkey('save-song-sel');">F6</td>
+			</tr>
+		</table>
+
 		<p id="resu"></p>
-		<script>
-			const ipc = require("electron").ipcRenderer;
-			function getStuff() {
-				ipc.send("getStuff", "ready");
-			}
-
-			ipc.on("gotStuff", (event, args) => {
-				document.getElementById("resu").innerHTML = args;
-			});
-
-			ipc.on("curSong", (event, args) => {
-				var res = filterResults(JSON.parse(args));
-				document.getElementById("resu").innerHTML = res;
-			});
-
-			function filterResults(res) {
-				var end = "";
-				end += res.item.name;
-				end += "<br>";
-				end += res.item.album.name;
-				return end;
-			}
-		</script>
 	</body>
+	<script src="./scripts/home.js"></script>
 </html>

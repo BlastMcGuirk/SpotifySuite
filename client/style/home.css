@@ -1,0 +1,27 @@
+table,
+th,
+td {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+th,
+td {
+	padding: 15px;
+}
+
+td {
+	text-align: left;
+}
+
+td:nth-child(3) {
+	text-align: center;
+}
+
+td:nth-child(3):hover {
+	background-color: #198f42;
+}
+
+.selected {
+	background-color: #198f42;
+}

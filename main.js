@@ -58,8 +58,12 @@ ipcMain.on("getStarted", (event, args) => {
 	);
 });
 
-ipcMain.on("getStuff", (event, args) => {
-	HTTPSRequest.getApi("/v1/me/player", (data) => {
-		event.sender.send("gotStuff", data);
-	});
+ipcMain.on("changeHotkey", (event, args) => {
+	// Called from apiCalls.js
+	var success = apiCalls.changeShortcut(args.curHK, args.newHK);
+	if (success) {
+		event.sender.send("changeHotkey", "success");
+	} else {
+		event.sender.send("changeHotkey", "failure");
+	}
 });

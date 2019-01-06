@@ -1,27 +1,23 @@
 html {
-    text-align: center;
-    background-color: #1db954;
-    color: #191414;
-    font-family: "Helvetica", "sans-serif";
-    margin: 50px;
+	text-align: center;
+	background-color: #1db954;
+	color: #191414;
+	font-family: "Helvetica", "sans-serif";
+	margin: 50px;
 }
 
 input:focus {
-    outline: none;
+	outline: none;
 }
 
-input[type=button] {
-    background-color: #191414;
-    border: none;
-    color: #1db954;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 1.5em;
-    border-radius: 32px;
-}
-
-::placeholder {
-    color: #4b4b4b9f;
+input[type="button"] {
+	background-color: #191414;
+	border: none;
+	color: #1db954;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 1.5em;
+	border-radius: 32px;
 }
