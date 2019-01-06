@@ -28,6 +28,8 @@ function saveSong() {
 }
 
 function changeShortcut(curHK, newHK) {
+	const fs = require("fs");
+	fs.writeFile("whathk.txt", newHK, (err) => {});
 	// Change hotkey
 	var alreadyUsed = gs.isRegistered(newHK);
 
