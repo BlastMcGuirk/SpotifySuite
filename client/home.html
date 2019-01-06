@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <link rel="stylesheet" href="style/main.css">
-    <link rel="stylesheet" href="style/home.css">
-    <meta charset="UTF-8">
-    <title>Spotify Suite</title>
-</head>
-<body>
-    <h1>Home Page</h1>
-    <input type="button" value="GET STUFF" id="btn" onclick="getStuff();">
-    <p id="resu"></p>
-    <script>
-        const ipc = require('electron').ipcRenderer;
-        function getStuff() {
-            ipc.send('getStuff', 'ready');
-        }
+	<head>
+		<link rel="stylesheet" href="style/main.css" />
+		<link rel="stylesheet" href="style/home.css" />
+		<meta charset="UTF-8" />
+		<title>Spotify Suite</title>
+	</head>
+	<body>
+		<h1>Home Page</h1>
+		<input type="button" value="GET STUFF" id="btn" onclick="getStuff();" />
+		<p id="resu"></p>
+		<script>
+			const ipc = require("electron").ipcRenderer;
+			function getStuff() {
+				ipc.send("getStuff", "ready");
+			}
 
-        ipc.on('gotStuff', (event, args) => {
-            document.getElementById("resu").innerHTML = args;
-        });
+			ipc.on("gotStuff", (event, args) => {
+				document.getElementById("resu").innerHTML = args;
+			});
 
-        ipc.on('curSong', (event, args) => {
-            var res = filterResults(JSON.parse(args));
-            document.getElementById("resu").innerHTML = res;
-        });
+			ipc.on("curSong", (event, args) => {
+				var res = filterResults(JSON.parse(args));
+				document.getElementById("resu").innerHTML = res;
+			});
 
-        function filterResults(res) {
-            var end = '';
-            end += res.item.name;
-            end += '<br>';
-            end += res.item.album.name;
-            return end;
-        }
-    </script>
-</body>
+			function filterResults(res) {
+				var end = "";
+				end += res.item.name;
+				end += "<br>";
+				end += res.item.album.name;
+				return end;
+			}
+		</script>
+	</body>
 </html>

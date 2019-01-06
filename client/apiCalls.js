@@ -1,18 +1,18 @@
-const HTTPSRequest = require('./httpsRequest.js');
+const HTTPSRequest = require("./httpsRequest.js");
 var window;
 
 function registerShortcuts(globalShortcut, mainWindow) {
-    window = mainWindow.webContents;
+	window = mainWindow.webContents;
 
-    globalShortcut.register('F7', getCurrentSong);
+	globalShortcut.register("F7", getCurrentSong);
 }
 
 function getCurrentSong() {
-    HTTPSRequest.getApi('/v1/me/player/currently-playing', (response) => {
-        window.send('curSong', response);
-    });
+	HTTPSRequest.getApi("/v1/me/player/currently-playing", (response) => {
+		window.send("curSong", response);
+	});
 }
 
 module.exports = {
-    registerShortcuts
-}
+	registerShortcuts
+};
